@@ -1,0 +1,51 @@
+{
+    "name": "refodev/refodev-php",
+    "description": "This package allows you to send events to refodev while a session is being recorded",
+    "keywords": [
+        "refodev",
+        "refodev-php"
+    ],
+    "homepage": "https://github.com/refodev/refodev-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "refodev",
+            "email": "contact@refodev.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-curl": "*"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.2",
+        "mockery/mockery": "^1.6",
+        "pestphp/pest": "^1.20",
+        "spatie/ray": "^1.28"
+    },
+    "autoload": {
+        "psr-4": {
+            "Refodev\\RefodevClient\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Refodev\\RefodevClient\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
