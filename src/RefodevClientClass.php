@@ -33,7 +33,7 @@ class RefodevClientClass
 
     public function createDatabaseEventTransaction(string $sessionId, string $sessionSecret, array $data): void
     {
-        if (!isset($data['sql'])) {
+        if (! isset($data['sql'])) {
             throw new \Error('`sql` must be set to create a database transaction event in $data');
         }
 
@@ -50,7 +50,7 @@ class RefodevClientClass
         $this->setOption(CURLOPT_URL, $endpoint);
         $this->setOption(CURLOPT_RETURNTRANSFER, true);
         $this->setOption(CURLOPT_POSTFIELDS, $data);
-        $this->setOption( CURLOPT_HTTPHEADER, ['x-session-secret-token: ' . $sessionSecret]);
+        $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: '.$sessionSecret]);
         $this->execute();
         $this->close();
     }
