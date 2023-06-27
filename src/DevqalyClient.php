@@ -33,25 +33,62 @@ class DevqalyClient
 
     public function createDatabaseEventTransaction(string $sessionId, string $sessionSecret, array $data): void
     {
-        if (! isset($data['sql'])) {
+        if (!isset($data['sql'])) {
             throw new \Error('`sql` must be set to create a database transaction event in $data');
         }
 
-        if ($sessionId === '') {
-            throw new \Error('$sessionId must be set and not empty');
-        }
+        $this->validateSessionId($sessionId);
+        $this->validateSessionSecret($sessionId);
 
-        if ($sessionSecret === '') {
-            throw new \Error('$sessionSecret must be set and not empty');
-        }
-
-        $endpoint = sprintf('%s/sessions/%s/events', $this->backendUrl, $sessionId);
+        $endpoint = $this->getCreateEventEndpoint($sessionId);
 
         $this->setOption(CURLOPT_URL, $endpoint);
         $this->setOption(CURLOPT_RETURNTRANSFER, true);
         $this->setOption(CURLOPT_POSTFIELDS, $data);
-        $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: '.$sessionSecret]);
+        $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: ' . $sessionSecret]);
         $this->execute();
         $this->close();
+    }
+
+    public function createLogEvent(string $sessionId, string $sessionSecret, array $data): void
+    {
+        if (!isset($data['level'])) {
+            throw new \Error('`level` must be set to create a log event in $data');
+        }
+
+        if (!isset($data['log'])) {
+            throw new \Error('`log` must be set to create a log event in $data');
+        }
+
+        $this->validateSessionSecret($sessionId);
+        $this->validateSessionId($sessionId);
+
+        $endpoint = $this->getCreateEventEndpoint($sessionId);
+
+        $this->setOption(CURLOPT_URL, $endpoint);
+        $this->setOption(CURLOPT_RETURNTRANSFER, true);
+        $this->setOption(CURLOPT_POSTFIELDS, $data);
+        $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: ' . $sessionSecret]);
+        $this->execute();
+        $this->close();
+    }
+
+    private function validateSessionId(string $sessionId): void
+    {
+        if ($sessionId === '') {
+            throw new \Error('$sessionId must be set and not empty');
+        }
+    }
+
+    private function validateSessionSecret(string $sessionSecret): void
+    {
+        if ($sessionSecret === '') {
+            throw new \Error('$sessionSecret must be set and not empty');
+        }
+    }
+
+    private function getCreateEventEndpoint(string $sessionId): string
+    {
+        return sprintf('%s/sessions/%s/events', $this->backendUrl, $sessionId);
     }
 }
