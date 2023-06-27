@@ -12,7 +12,7 @@ class DevqalyClient
 
     public function __construct(?string $backendUrl)
     {
-        $this->backendUrl = $backendUrl ?? "https://api.devqaly.com";
+        $this->backendUrl = $backendUrl ?? 'https://api.devqaly.com';
         $this->handle = curl_init($backendUrl);
     }
 
