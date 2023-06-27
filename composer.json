@@ -1,16 +1,16 @@
 {
-    "name": "devqaly/refodev-php",
-    "description": "This package allows you to send events to refodev while a session is being recorded",
+    "name": "devqaly/devqaly-php",
+    "description": "This package allows you to send events to devqaly while a session is being recorded",
     "keywords": [
-        "refodev",
-        "refodev-php"
+        "devqaly",
+        "devqaly-php"
     ],
-    "homepage": "https://github.com/refodev/refodev-php",
+    "homepage": "https://github.com/devqaly/sdk-php",
     "license": "MIT",
     "authors": [
         {
-            "name": "refodev",
-            "email": "contact@refodev.com",
+            "name": "devqaly",
+            "email": "contact@devqaly.com",
             "role": "Developer"
         }
     ],
@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Refodev\\RefodevClient\\": "src"
+            "Devqaly\\DevqalyClient\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Refodev\\RefodevClient\\Tests\\": "tests"
+            "Devqaly\\DevqalyClient\\Tests\\": "tests"
         }
     },
     "scripts": {

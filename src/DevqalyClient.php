@@ -1,6 +1,6 @@
 <?php
 
-namespace Refodev\RefodevClient;
+namespace Devqaly\DevqalyClient;
 
 use CurlHandle;
 

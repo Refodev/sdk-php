@@ -19,7 +19,7 @@
     verbose="true"
 >
     <testsuites>
-        <testsuite name="Refodev Test Suite">
+        <testsuite name="Devqaly Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
