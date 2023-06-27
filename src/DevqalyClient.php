@@ -4,15 +4,15 @@ namespace Refodev\RefodevClient;
 
 use CurlHandle;
 
-class RefodevClientClass
+class DevqalyClient
 {
     private string $backendUrl;
 
     private CurlHandle $handle;
 
-    public function __construct(string $backendUrl)
+    public function __construct(?string $backendUrl)
     {
-        $this->backendUrl = $backendUrl;
+        $this->backendUrl = $backendUrl ?? "https://api.devqaly.com";
         $this->handle = curl_init($backendUrl);
     }
 

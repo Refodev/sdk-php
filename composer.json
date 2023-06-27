@@ -1,5 +1,5 @@
 {
-    "name": "refodev/refodev-php",
+    "name": "devqaly/refodev-php",
     "description": "This package allows you to send events to refodev while a session is being recorded",
     "keywords": [
         "refodev",
