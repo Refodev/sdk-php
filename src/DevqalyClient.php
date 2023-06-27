@@ -33,7 +33,7 @@ class DevqalyClient
 
     public function createDatabaseEventTransaction(string $sessionId, string $sessionSecret, array $data): void
     {
-        if (!isset($data['sql'])) {
+        if (! isset($data['sql'])) {
             throw new \Error('`sql` must be set to create a database transaction event in $data');
         }
 
@@ -45,18 +45,18 @@ class DevqalyClient
         $this->setOption(CURLOPT_URL, $endpoint);
         $this->setOption(CURLOPT_RETURNTRANSFER, true);
         $this->setOption(CURLOPT_POSTFIELDS, $data);
-        $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: ' . $sessionSecret]);
+        $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: '.$sessionSecret]);
         $this->execute();
         $this->close();
     }
 
     public function createLogEvent(string $sessionId, string $sessionSecret, array $data): void
     {
-        if (!isset($data['level'])) {
+        if (! isset($data['level'])) {
             throw new \Error('`level` must be set to create a log event in $data');
         }
 
-        if (!isset($data['log'])) {
+        if (! isset($data['log'])) {
             throw new \Error('`log` must be set to create a log event in $data');
         }
 
@@ -68,7 +68,7 @@ class DevqalyClient
         $this->setOption(CURLOPT_URL, $endpoint);
         $this->setOption(CURLOPT_RETURNTRANSFER, true);
         $this->setOption(CURLOPT_POSTFIELDS, $data);
-        $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: ' . $sessionSecret]);
+        $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: '.$sessionSecret]);
         $this->execute();
         $this->close();
     }
