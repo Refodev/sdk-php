@@ -48,7 +48,7 @@ class DevqalyClient
         $this->setOption(CURLOPT_URL, $endpoint);
         $this->setOption(CURLOPT_RETURNTRANSFER, true);
         $this->setOption(CURLOPT_POSTFIELDS, $this->generatePayload($data));
-        $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: ' . $sessionSecret]);
+        $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: '.$sessionSecret]);
         $this->execute();
         $this->close();
     }
@@ -71,7 +71,7 @@ class DevqalyClient
         $this->setOption(CURLOPT_URL, $endpoint);
         $this->setOption(CURLOPT_RETURNTRANSFER, true);
         $this->setOption(CURLOPT_POSTFIELDS, $this->generatePayload($data));
-        $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: ' . $sessionSecret]);
+        $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: '.$sessionSecret]);
         $this->execute();
         $this->close();
     }
