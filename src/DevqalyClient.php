@@ -8,12 +8,15 @@ class DevqalyClient
 {
     private string $backendUrl;
 
+    private string $sourceIdentifier;
+
     private CurlHandle $handle;
 
-    public function __construct(?string $backendUrl)
+    public function __construct(?string $backendUrl, ?string $sourceIdentifier)
     {
-        $this->backendUrl = $backendUrl ?? 'https://api.devqaly.com';
         $this->handle = curl_init($backendUrl);
+        $this->backendUrl = $backendUrl ?? 'https://api.devqaly.com';
+        $this->sourceIdentifier = $sourceIdentifier;
     }
 
     public function setOption($name, $value): void
@@ -44,7 +47,7 @@ class DevqalyClient
 
         $this->setOption(CURLOPT_URL, $endpoint);
         $this->setOption(CURLOPT_RETURNTRANSFER, true);
-        $this->setOption(CURLOPT_POSTFIELDS, $data);
+        $this->setOption(CURLOPT_POSTFIELDS, $this->generatePayload($data));
         $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: ' . $sessionSecret]);
         $this->execute();
         $this->close();
@@ -67,10 +70,19 @@ class DevqalyClient
 
         $this->setOption(CURLOPT_URL, $endpoint);
         $this->setOption(CURLOPT_RETURNTRANSFER, true);
-        $this->setOption(CURLOPT_POSTFIELDS, $data);
+        $this->setOption(CURLOPT_POSTFIELDS, $this->generatePayload($data));
         $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: ' . $sessionSecret]);
         $this->execute();
         $this->close();
+    }
+
+    private function generatePayload(array $data): array
+    {
+        return [
+            ...$data,
+            'source' => $this->sourceIdentifier,
+            'clientUtcEventCreatedAt' => (new \DateTime())->format('Y-m-d H:i:s.SSSSSS'),
+        ];
     }
 
     private function validateSessionId(string $sessionId): void
