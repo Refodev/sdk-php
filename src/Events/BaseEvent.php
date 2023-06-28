@@ -62,5 +62,4 @@ class BaseEvent
             throw new \Error('$sessionSecret must be set and not empty');
         }
     }
-
 }
