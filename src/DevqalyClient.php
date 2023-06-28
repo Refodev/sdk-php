@@ -36,7 +36,7 @@ class DevqalyClient
 
     public function createDatabaseEventTransaction(string $sessionId, string $sessionSecret, array $data): void
     {
-        if (!isset($data['sql'])) {
+        if (! isset($data['sql'])) {
             throw new \Error('`sql` must be set to create a database transaction event in $data');
         }
 
@@ -55,11 +55,11 @@ class DevqalyClient
 
     public function createLogEvent(string $sessionId, string $sessionSecret, array $data): void
     {
-        if (!isset($data['level'])) {
+        if (! isset($data['level'])) {
             throw new \Error('`level` must be set to create a log event in $data');
         }
 
-        if (!isset($data['log'])) {
+        if (! isset($data['log'])) {
             throw new \Error('`log` must be set to create a log event in $data');
         }
 
