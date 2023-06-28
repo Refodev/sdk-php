@@ -6,6 +6,10 @@ use CurlHandle;
 
 class DevqalyClient
 {
+    const DATABASE_TRANSACTION_EVENT_TYPE = "App\Models\Session\Event\EventDatabaseTransaction";
+
+    const LOG_EVENT_TYPE = "App\Models\Session\Event\EventLog";
+
     private string $backendUrl;
 
     private string $sourceIdentifier;
@@ -47,7 +51,10 @@ class DevqalyClient
 
         $this->setOption(CURLOPT_URL, $endpoint);
         $this->setOption(CURLOPT_RETURNTRANSFER, true);
-        $this->setOption(CURLOPT_POSTFIELDS, $this->generatePayload($data));
+        $this->setOption(
+            CURLOPT_POSTFIELDS,
+            $this->generatePayload($data, self::DATABASE_TRANSACTION_EVENT_TYPE)
+        );
         $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: '.$sessionSecret]);
         $this->execute();
         $this->close();
@@ -70,16 +77,20 @@ class DevqalyClient
 
         $this->setOption(CURLOPT_URL, $endpoint);
         $this->setOption(CURLOPT_RETURNTRANSFER, true);
-        $this->setOption(CURLOPT_POSTFIELDS, $this->generatePayload($data));
+        $this->setOption(
+            CURLOPT_POSTFIELDS,
+            $this->generatePayload($data, self::LOG_EVENT_TYPE)
+        );
         $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: '.$sessionSecret]);
         $this->execute();
         $this->close();
     }
 
-    private function generatePayload(array $data): array
+    private function generatePayload(array $data, string $type): array
     {
         return [
             ...$data,
+            'type' => $type,
             'source' => $this->sourceIdentifier,
             'clientUtcEventCreatedAt' => (new \DateTime())->format('Y-m-d H:i:s.SSSSSS'),
         ];
