@@ -45,7 +45,7 @@ class BaseEvent
             ...$data,
             'type' => $type,
             'source' => $this->sourceIdentifier,
-            'clientUtcEventCreatedAt' => (new \DateTime())->format('Y-m-d H:i:s.SSSSSS'),
+            'clientUtcEventCreatedAt' => (new \DateTime('now', new \DateTimeZone('utc')))->format('Y-m-d\TH:i:s.u\Z'),
         ];
     }
 
