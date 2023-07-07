@@ -19,11 +19,19 @@ class DevqalyClient
 
     public function createDatabaseEventTransaction(string $sessionId, string $sessionSecret, array $data): void
     {
-        $this->databaseEvent->create($sessionId, $sessionSecret, $data);
+        try {
+            $this->databaseEvent->create($sessionId, $sessionSecret, $data);
+        } catch (\Exception $e) {
+            echo "Error making request to devqaly's servers: " . $e->getMessage();
+        }
     }
 
     public function createLogEvent(string $sessionId, string $sessionSecret, array $data): void
     {
-        $this->logEvent->create($sessionId, $sessionSecret, $data);
+        try {
+            $this->logEvent->create($sessionId, $sessionSecret, $data);
+        } catch (\Exception $e) {
+            echo "Error making request to devqaly's servers: " . $e->getMessage();
+        }
     }
 }
