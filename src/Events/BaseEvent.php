@@ -15,7 +15,7 @@ class BaseEvent
     public function __construct(?string $backendUrl, ?string $sourceIdentifier)
     {
         $this->handle = curl_init($backendUrl);
-        $this->backendUrl = $backendUrl ?? 'https://api.devqaly.com';
+        $this->backendUrl = $backendUrl ?? 'https://api.devqaly.com/api';
         $this->sourceIdentifier = $sourceIdentifier;
     }
 

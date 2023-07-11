@@ -28,7 +28,7 @@ class DatabaseTransactionEvent extends BaseEvent implements Event
             CURLOPT_POSTFIELDS,
             $this->generatePayload($data, self::EVENT_TYPE)
         );
-        $this->setOption(CURLOPT_HTTPHEADER, ['x-session-secret-token: '.$sessionSecret]);
+        $this->setOption(CURLOPT_HTTPHEADER, ['x-devqaly-session-secret-token: '.$sessionSecret]);
         $this->execute();
         $this->close();
     }
