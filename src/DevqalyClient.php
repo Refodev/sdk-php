@@ -22,7 +22,7 @@ class DevqalyClient
         try {
             $this->databaseEvent->create($sessionId, $sessionSecret, $data);
         } catch (\Exception $e) {
-            echo "Error making request to devqaly's servers: " . $e->getMessage();
+            echo "Error making request to devqaly's servers: ".$e->getMessage();
         }
     }
 
@@ -31,7 +31,7 @@ class DevqalyClient
         try {
             $this->logEvent->create($sessionId, $sessionSecret, $data);
         } catch (\Exception $e) {
-            echo "Error making request to devqaly's servers: " . $e->getMessage();
+            echo "Error making request to devqaly's servers: ".$e->getMessage();
         }
     }
 }
