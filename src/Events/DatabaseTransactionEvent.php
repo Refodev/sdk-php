@@ -24,6 +24,8 @@ class DatabaseTransactionEvent extends BaseEvent implements Event
 
         $this->setOption(CURLOPT_URL, $endpoint);
         $this->setOption(CURLOPT_RETURNTRANSFER, true);
+        $this->setOption(CURLOPT_HEADER, false);
+        $this->setOption(CURLOPT_RETURNTRANSFER, false);
         $this->setOption(
             CURLOPT_POSTFIELDS,
             $this->generatePayload($data, self::EVENT_TYPE)
