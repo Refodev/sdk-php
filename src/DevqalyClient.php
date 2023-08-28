@@ -11,10 +11,10 @@ class DevqalyClient
 
     private LogEvent $logEvent;
 
-    public function __construct(?string $backendUrl, ?string $sourceIdentifier)
+    public function __construct(?string $backendUrl, ?string $sourceIdentifier, string $securityToken)
     {
-        $this->databaseEvent = new DatabaseTransactionEvent($backendUrl, $sourceIdentifier);
-        $this->logEvent = new LogEvent($backendUrl, $sourceIdentifier);
+        $this->databaseEvent = new DatabaseTransactionEvent($backendUrl, $sourceIdentifier, $securityToken);
+        $this->logEvent = new LogEvent($backendUrl, $sourceIdentifier, $securityToken);
     }
 
     public function createDatabaseEventTransaction(string $sessionId, string $sessionSecret, array $data): void

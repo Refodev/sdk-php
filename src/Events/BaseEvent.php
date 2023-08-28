@@ -12,11 +12,14 @@ class BaseEvent
 
     private string $backendUrl;
 
-    public function __construct(?string $backendUrl, ?string $sourceIdentifier)
+    private string $securityToken;
+
+    public function __construct(?string $backendUrl, ?string $sourceIdentifier, string $securityToken)
     {
         $this->handle = curl_init($backendUrl);
         $this->backendUrl = $backendUrl ?? 'https://api.devqaly.com/api';
         $this->sourceIdentifier = $sourceIdentifier;
+        $this->securityToken = $securityToken;
     }
 
     public function setOption($name, $value): void
@@ -46,6 +49,7 @@ class BaseEvent
             'type' => $type,
             'source' => $this->sourceIdentifier,
             'clientUtcEventCreatedAt' => (new \DateTime('now', new \DateTimeZone('utc')))->format('Y-m-d\TH:i:s.u\Z'),
+            'securityToken' => $this->securityToken
         ];
     }
 
