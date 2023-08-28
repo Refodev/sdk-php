@@ -6,11 +6,6 @@ class DatabaseTransactionEvent extends BaseEvent implements Event
 {
     const EVENT_TYPE = 'App\Models\Session\Event\EventDatabaseTransaction';
 
-    public function __construct(?string $backendUrl, ?string $sourceIdentifier)
-    {
-        parent::__construct($backendUrl, $sourceIdentifier);
-    }
-
     public function create(string $sessionId, string $sessionSecret, array $data): void
     {
         if (! isset($data['sql'])) {

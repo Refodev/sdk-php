@@ -5,8 +5,9 @@ use Devqaly\DevqalyClient\Events\BaseEvent;
 it('should return the correct endpoint when calling `getCreateEventEndpoint` method', function () {
     $backendUrl = 'https://devqaly.test/api';
     $sourceIdentifier = 'microservice-x';
+    $securityToken = 'nJOFUgmcKDhzpMMbL6VqEzWbK7XOby8ZMqOWqYooTE1Xtd4Y3RQBidpeq42i';
 
-    $client = new BaseEvent($backendUrl, $sourceIdentifier);
+    $client = new BaseEvent($backendUrl, $sourceIdentifier, $securityToken);
 
     $sessionId = 'b79cb3ba-745e-5d9a-8903-4a02327a7e09';
 
@@ -18,8 +19,9 @@ it('should return the correct endpoint when calling `getCreateEventEndpoint` met
 it('should return correct payload when calling `generatePayload` method', function () {
     $backendUrl = 'https://devqaly.test/api';
     $sourceIdentifier = 'microservice-x';
+    $securityToken = 'nJOFUgmcKDhzpMMbL6VqEzWbK7XOby8ZMqOWqYooTE1Xtd4Y3RQBidpeq42i';
 
-    $client = new BaseEvent($backendUrl, $sourceIdentifier);
+    $client = new BaseEvent($backendUrl, $sourceIdentifier, $securityToken);
 
     $clickEventPayload = ['positionX' => 500, 'positionY' => 500];
     $eventType = 'click-event';
@@ -33,6 +35,7 @@ it('should return correct payload when calling `generatePayload` method', functi
             ...$clickEventPayload,
             'type' => $eventType,
             'source' => $sourceIdentifier,
+            'securityToken' => $securityToken,
         ])
         ->and(DateTime::createFromFormat('Y-m-d\TH:i:s.u\Z', $payload['clientUtcEventCreatedAt']) !== false)
         ->toBeTrue();
@@ -41,8 +44,9 @@ it('should return correct payload when calling `generatePayload` method', functi
 it('should allow to validate the session id when calling `validateSessionId` method', function () {
     $backendUrl = 'https://devqaly.test/api';
     $sourceIdentifier = 'microservice-x';
+    $securityToken = 'nJOFUgmcKDhzpMMbL6VqEzWbK7XOby8ZMqOWqYooTE1Xtd4Y3RQBidpeq42i';
 
-    $client = new BaseEvent($backendUrl, $sourceIdentifier);
+    $client = new BaseEvent($backendUrl, $sourceIdentifier, $securityToken);
 
     $sessionId = 'c7622e14-21f8-40c2-b151-3a311816b423';
 
@@ -56,8 +60,9 @@ it('should allow to validate the session id when calling `validateSessionId` met
 it('should throw error exception when calling `validateSessionId` method with invalid session id', function () {
     $backendUrl = 'https://devqaly.test/api';
     $sourceIdentifier = 'microservice-x';
+    $securityToken = 'nJOFUgmcKDhzpMMbL6VqEzWbK7XOby8ZMqOWqYooTE1Xtd4Y3RQBidpeq42i';
 
-    $client = new BaseEvent($backendUrl, $sourceIdentifier);
+    $client = new BaseEvent($backendUrl, $sourceIdentifier, $securityToken);
 
     $sessionId = '';
 
@@ -67,8 +72,9 @@ it('should throw error exception when calling `validateSessionId` method with in
 it('should allow to validate session secret when calling `validateSessionSecret` method', function () {
     $backendUrl = 'https://devqaly.test/api';
     $sourceIdentifier = 'microservice-x';
+    $securityToken = 'nJOFUgmcKDhzpMMbL6VqEzWbK7XOby8ZMqOWqYooTE1Xtd4Y3RQBidpeq42i';
 
-    $client = new BaseEvent($backendUrl, $sourceIdentifier);
+    $client = new BaseEvent($backendUrl, $sourceIdentifier, $securityToken);
 
     $sessionSecret = 'c7622e14-21f8-40c2-b151-3a311816b423';
 
@@ -82,8 +88,9 @@ it('should allow to validate session secret when calling `validateSessionSecret`
 it('should throw error exception when calling `validateSessionSecret` method with invalid session secret', function () {
     $backendUrl = 'https://devqaly.test/api';
     $sourceIdentifier = 'microservice-x';
+    $securityToken = 'nJOFUgmcKDhzpMMbL6VqEzWbK7XOby8ZMqOWqYooTE1Xtd4Y3RQBidpeq42i';
 
-    $client = new BaseEvent($backendUrl, $sourceIdentifier);
+    $client = new BaseEvent($backendUrl, $sourceIdentifier, $securityToken);
 
     $sessionSecret = '';
 
