@@ -7,8 +7,9 @@ it('should throw an error when passing empty sql', function () {
     $sourceIdentifier = 'microservice-x';
     $sessionId = 'c7622e14-21f8-40c2-b151-3a311816b423';
     $sessionSecret = 'c7622e14-21f8-40c2-b151-3a311816b423';
+    $securityToken = 'nJOFUgmcKDhzpMMbL6VqEzWbK7XOby8ZMqOWqYooTE1Xtd4Y3RQBidpeq42i';
 
-    $client = new DatabaseTransactionEvent($backendUrl, $sourceIdentifier);
+    $client = new DatabaseTransactionEvent($backendUrl, $sourceIdentifier, $securityToken);
 
     $client->create($sessionId, $sessionSecret, []);
 })->throws(\Error::class, '`sql` must be set to create a database transaction event in $data');
@@ -18,8 +19,9 @@ it('should execute curl request when calling `create` method and close', functio
     $sourceIdentifier = 'microservice-x';
     $sessionId = 'c7622e14-21f8-40c2-b151-3a311816b423';
     $sessionSecret = 'c7622e14-21f8-40c2-b151-3a311816b423';
+    $securityToken = 'nJOFUgmcKDhzpMMbL6VqEzWbK7XOby8ZMqOWqYooTE1Xtd4Y3RQBidpeq42i';
 
-    $client = Mockery::mock(DatabaseTransactionEvent::class, [$backendUrl, $sourceIdentifier])->makePartial();
+    $client = Mockery::mock(DatabaseTransactionEvent::class, [$backendUrl, $sourceIdentifier, $securityToken])->makePartial();
 
     $endpoint = 'https://something.com';
 

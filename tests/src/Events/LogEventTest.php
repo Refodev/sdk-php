@@ -7,8 +7,9 @@ it('should throw an error when passing empty `level`', function () {
     $sourceIdentifier = 'microservice-x';
     $sessionId = 'c7622e14-21f8-40c2-b151-3a311816b423';
     $sessionSecret = 'c7622e14-21f8-40c2-b151-3a311816b423';
+    $securityToken = 'nJOFUgmcKDhzpMMbL6VqEzWbK7XOby8ZMqOWqYooTE1Xtd4Y3RQBidpeq42i';
 
-    $client = new LogEvent($backendUrl, $sourceIdentifier);
+    $client = new LogEvent($backendUrl, $sourceIdentifier, $securityToken);
 
     $client->create($sessionId, $sessionSecret, ['log' => 'some log']);
 })->throws(\Error::class, '`level` must be set to create a log event in $data');
@@ -18,8 +19,9 @@ it('should throw an error when passing empty `log`', function () {
     $sourceIdentifier = 'microservice-x';
     $sessionId = 'c7622e14-21f8-40c2-b151-3a311816b423';
     $sessionSecret = 'c7622e14-21f8-40c2-b151-3a311816b423';
+    $securityToken = 'nJOFUgmcKDhzpMMbL6VqEzWbK7XOby8ZMqOWqYooTE1Xtd4Y3RQBidpeq42i';
 
-    $client = new LogEvent($backendUrl, $sourceIdentifier);
+    $client = new LogEvent($backendUrl, $sourceIdentifier, $securityToken);
 
     $client->create($sessionId, $sessionSecret, ['level' => LogEvent::LOG_LEVEL_ALERT]);
 })->throws(\Error::class, '`log` must be set to create a log event in $data');
@@ -29,8 +31,9 @@ it('should execute curl request when calling `create` method and close', functio
     $sourceIdentifier = 'microservice-x';
     $sessionId = 'c7622e14-21f8-40c2-b151-3a311816b423';
     $sessionSecret = 'c7622e14-21f8-40c2-b151-3a311816b423';
+    $securityToken = 'nJOFUgmcKDhzpMMbL6VqEzWbK7XOby8ZMqOWqYooTE1Xtd4Y3RQBidpeq42i';
 
-    $client = Mockery::mock(LogEvent::class, [$backendUrl, $sourceIdentifier])->makePartial();
+    $client = Mockery::mock(LogEvent::class, [$backendUrl, $sourceIdentifier, $securityToken])->makePartial();
 
     $endpoint = 'https://something.com';
 
