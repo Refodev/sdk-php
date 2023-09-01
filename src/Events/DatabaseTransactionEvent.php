@@ -17,13 +17,20 @@ class DatabaseTransactionEvent extends BaseEvent implements Event
 
         $endpoint = $this->getCreateEventEndpoint($sessionId);
 
+        $payload = json_encode($this->generatePayload($data, self::EVENT_TYPE));
         $this->setOption(CURLOPT_URL, $endpoint);
         $this->setOption(CURLOPT_RETURNTRANSFER, true);
+        $this->setOption(CURLOPT_POST, true);
         $this->setOption(
             CURLOPT_POSTFIELDS,
-            $this->generatePayload($data, self::EVENT_TYPE)
+            $payload
         );
-        $this->setOption(CURLOPT_HTTPHEADER, ['x-devqaly-session-secret-token: '.$sessionSecret]);
+        $this->setOption(CURLOPT_HTTPHEADER, [
+            'x-devqaly-session-secret-token: '.$sessionSecret,
+            'Accept: application/json',
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($payload)
+        ]);
         $this->execute();
         $this->close();
     }
